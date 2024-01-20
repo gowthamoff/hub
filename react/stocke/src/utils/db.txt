@@ -1,0 +1,251 @@
+{
+"id":$input.params('id')
+}
+
+#get
+import pymysql
+
+def lambda_handler(event, context):
+    rds_endpoint = ""
+    db_user = "admin"
+    db_password = ""
+    db_name = "user"
+    table_name = "producttable"
+
+    # Extract the ID parameter from the query string
+    product_id = event.get('id')
+
+    # Check if 'id' is present in the request
+    if product_id is None:
+        return {
+            'statusCode': 400,
+            'body': 'Missing "id" parameter in the request'
+        }
+
+    # Connect to RDS
+    try:
+        conn = pymysql.connect(host=rds_endpoint, user=db_user, password=db_password, database=db_name)
+    except Exception as e:
+        return {
+            'statusCode': 500,
+            'body': f"Error connecting to RDS: {str(e)}"
+        }
+
+    # Query data from the table
+    try:
+        with conn.cursor() as cursor:
+            if product_id:
+                # Fetch a single record based on the provided ID
+                cursor.execute(f"SELECT * FROM {table_name} WHERE id = %s", (product_id,))
+                result = cursor.fetchone()
+
+                if not result:
+                    return {
+                        'statusCode': 404,
+                        'body': f"No record found with id={product_id}"
+                    }
+
+                # Convert the result to the desired JSON format for a single record
+                combo = {
+                    "id": result[0],
+                    "name": result[1],
+                    "price": result[2],
+                    "quantity": result[3]
+                }
+
+                return {
+                    'statusCode': 200,
+                    'body': combo
+                }
+            else:
+                # Fetch all records if no ID parameter is provided
+                cursor.execute(f"SELECT * FROM {table_name}")
+                result = cursor.fetchall()
+
+                # Convert the result to the desired JSON format for all records
+                formatted_result = []
+
+                for row in result:
+                    combo = {
+                        "id": row[0],
+                        "name": row[1],
+                        "price": row[2],
+                        "quantity": row[3]
+                    }
+
+                    formatted_result.append(combo)
+
+                return {
+                    'statusCode': 200,
+                    'body': formatted_result
+                }
+
+    except Exception as e:
+        return {
+            'statusCode': 500,
+            'body': f"Error executing SQL query: {str(e)}"
+        }
+    finally:
+        conn.close()
+
+post 
+
+import json
+import pymysql
+
+def lambda_handler(event, context):
+    rds_endpoint = ""
+    db_user = "admin"
+    db_password = ""
+    db_name = "user"
+    table_name = "producttable"
+    conn = None
+
+    try:
+        # Validate request structure
+        if not all(key in event for key in ('name', 'price', 'quantity')):
+            return {
+                'statusCode': 400,
+                'body': json.dumps({"error": "Invalid request structure"})
+            }
+
+        name = event['name']
+        price = event['price']
+        quantity = event['quantity']
+
+        conn = pymysql.connect(host=rds_endpoint, user=db_user, password=db_password, database=db_name)
+
+        with conn.cursor() as cursor:
+            # Use parameterized query to prevent SQL injection
+            cursor.execute("INSERT INTO {} (name, price, quantity) VALUES (%s, %s, %s)".format(table_name),
+                           (name, price, quantity))
+        conn.commit()
+
+        # Return more information in the response
+        return {
+            'statusCode': 200,
+            'body': {"message": "Data inserted successfully"}
+        }
+
+    except Exception as e:
+        # Ensure that the error message is a simple string
+        error_message = str(e)
+        return {
+            'statusCode': 500,
+            'body': {"error": error_message}
+        }
+    finally:
+        if conn:
+            conn.close()
+
+put
+import json
+import pymysql
+
+def lambda_handler(event, context):
+    rds_endpoint = ""
+    db_user = "admin"
+    db_password = ""
+    db_name = "user"
+    table_name = "producttable"
+    conn = None
+
+    try:
+        # Validate request structure and check for the presence of 'id'
+        if not all(key in event for key in ('id', 'name', 'price', 'quantity')):
+            return {
+                'statusCode': 400,
+                'body': json.dumps({"error": "Invalid request structure"})
+            }
+
+        id = event['id']
+        name = event['name']
+        price = event['price']
+        quantity = event['quantity']
+
+        conn = pymysql.connect(host=rds_endpoint, user=db_user, password=db_password, database=db_name)
+
+        with conn.cursor() as cursor:
+            # Use parameterized query to prevent SQL injection
+            cursor.execute("UPDATE {} SET name=%s, price=%s, quantity=%s WHERE id=%s".format(table_name),
+                           (name, price, quantity, id))
+        conn.commit()
+
+        # Check if any record was updated
+        if cursor.rowcount == 0:
+            return {
+                'statusCode': 404,
+                'body': json.dumps({"error": "Record not found"})
+            }
+
+        # Return more information in the response
+        return {
+            'statusCode': 200,
+            'body': json.dumps({"message": "Data updated successfully"})
+        }
+
+    except Exception as e:
+        # Ensure that the error message is a simple string
+        error_message = str(e)
+        return {
+            'statusCode': 500,
+            'body': json.dumps({"error": error_message})
+        }
+    finally:
+        if conn:
+            conn.close()
+
+delete
+
+import json
+import pymysql
+
+def lambda_handler(event, context):
+    rds_endpoint = ""
+    db_user = "admin"
+    db_password = ""
+    db_name = "user"
+    table_name = "producttable"
+    conn = None
+
+    try:
+        # Validate request structure and check for the presence of 'id'
+        if 'id' not in event:
+            return {
+                'statusCode': 400,
+                'body': json.dumps({"error": "Invalid request structure. 'id' is required for deletion."})
+            }
+
+        id = event['id']
+
+        conn = pymysql.connect(host=rds_endpoint, user=db_user, password=db_password, database=db_name)
+
+        with conn.cursor() as cursor:
+            # Use parameterized query to prevent SQL injection
+            cursor.execute("DELETE FROM {} WHERE id=%s".format(table_name), (id,))
+
+        conn.commit()
+
+        # Check if any record was deleted
+        if cursor.rowcount == 0:
+            return {
+                'statusCode': 404,
+                'body': json.dumps({"error": "Record not found"})
+            }
+
+        # Return more information in the response
+        return {
+            'statusCode': 200,
+            'body': json.dumps({"message": "Data deleted successfully"})
+        }
+
+    except Exception as e:
+        # Ensure that the error message is a simple string
+        error_message = str(e)
+        return {
+            'statusCode': 500,
+            'body': json.dumps({"error": error_message})
+        }
+    finally:
+        if conn:
+            conn.close()
