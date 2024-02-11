@@ -40,7 +40,8 @@
         "description": "Personal project for study subject. I was responsible for testing photography application that optimizes images with popular algorithms used by graphic editors like Pixlr or Adobe Photoshop. I've earned A grade :)",
         "images": [
           "images/portfolio/photography/p1.jpg",
-          "images/portfolio/photography/p2.jpg"
+          "images/portfolio/photography/p2.jpg",
+          "images/portfolio/photography/p3.jpg"
         ],
         "url": "https://github.com",
         "technologies": [
