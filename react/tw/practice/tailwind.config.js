@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/App.jsx", "./src/components/Header.jsx"],
+  content: ["./index.html", "./src/App.jsx", "./src/components/Header.jsx","./src/components/DeleteModal.jsx"],
   theme: {
     screens: {
       xs: { min: "200px", max: "580px" },
