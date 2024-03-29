@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from "react";
+import "./App.scss";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import About from "./components/About";
+import Experience from "./components/Experience";
+import Projects from "./components/Projects";
+import Skills from "./components/Skills";
 
-function App() {
-  const [count, setCount] = useState(0)
+import resumeData from "./utils/res_primaryLanguage.json";
+import sharedData from "./utils/portfolio_shared_data.json";
+
+const App = () => {
+  const [resumeDataState, setResumeData] = useState({});
+  const [sharedDataState, setSharedData] = useState({});
+
+  useEffect(() => {
+    setResumeData(resumeData);
+    setSharedData(sharedData);
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div>
+      <Header sharedData={sharedDataState.basic_info} />
+      <About
+        resumeBasicInfo={resumeDataState.basic_info}
+        sharedBasicInfo={sharedDataState.basic_info}
+      />
+      <Projects
+        resumeProjects={resumeDataState.projects}
+        resumeBasicInfo={resumeDataState.basic_info}
+      />
+      <Skills
+        sharedSkills={sharedDataState.skills}
+        resumeBasicInfo={resumeDataState.basic_info}
+      />
+      <Experience
+        resumeExperience={resumeDataState.experience}
+        resumeBasicInfo={resumeDataState.basic_info}
+      />
+      <Footer sharedBasicInfo={sharedDataState.basic_info} />
+    </div>
+  );
+};
 
-export default App
+export default App;
