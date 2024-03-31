@@ -5,13 +5,15 @@ import "./App.css";
 import Header from "./components/Header";
 import DeleteModal from "./components/DeleteModal";
 import ProfileCard from "./components/ProfileCard";
+import SocialMediaProfile from "./components/SocialMediaProfile";
 
 function App() {
   return (
     <>
-      <Header/>
+      {/* <Header/> */}
       {/* <DeleteModal/> */}
       {/* <ProfileCard/> */}
+      <SocialMediaProfile/>
     </>
   );
 }

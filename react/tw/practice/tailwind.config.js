@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/App.jsx", "./src/components/Header.jsx","./src/components/DeleteModal.jsx"],
+  content: ["./index.html", "./src/App.jsx", "./src/components/Header.jsx","./src/components/DeleteModal.jsx","./src/components/SocialMediaProfile.jsx"],
   theme: {
     screens: {
       xs: { min: "200px", max: "580px" },
@@ -10,7 +10,14 @@ export default {
       xl: { min: "1280px", max: "1535px" },
       "2xl": { min: "1536px" },
     },
-    extend: {},
+    extend: {
+      colors:{
+        'card-color':'#D1D5DB',
+        'btn-light-blue':'#DAE8FA',
+        'btn-text-blue':'#62A7F6',
+        'btn-bg-blue':'#1D4ED8',
+      }
+    },
   },
   plugins: [],
 };
