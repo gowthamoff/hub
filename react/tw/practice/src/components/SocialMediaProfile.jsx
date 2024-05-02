@@ -4,7 +4,7 @@ const SocialMediaProfile = () => {
   return (
     <>
       <div className="flex h-screen bg-slate-400 items-center justify-center">
-        <div className="flex flex-col w-4/5 bg-card-color rounded-lg p-4 xs:p-0">
+        <div className="flex flex-col w-4/5 bg-card-color rounded-lg p-4 xs:p-0 gap-2">
           <div className="flex h-1/2 w-full justify-evenly items-center xs:flex-col xs:gap-2">
             <img
               src="https://images.pexels.com/photos/3586798/pexels-photo-3586798.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
@@ -32,7 +32,7 @@ const SocialMediaProfile = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex justify-evenly xs:justify-between items-center">
+              <div className="flex justify-evenly items-center">
                 <button className="px-6 py-2 rounded-lg bg-btn-light-blue text-btn-text-blue font-semibold">
                   Follow
                 </button>
