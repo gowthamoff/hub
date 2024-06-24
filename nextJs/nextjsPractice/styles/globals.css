@@ -7,6 +7,12 @@
 /* 
   Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
 */
+/* @layer base {
+  .font-inter {
+    font-family: 'Inter', sans-serif;
+  }
+} */
+
 
 .main {
   width: 100vw;
@@ -14,7 +20,7 @@
   position: fixed;
   display: flex;
   justify-content: center;
-  padding: 120px 24px 160px 24px;
+  /* padding: 120px 24px 160px 24px; */
   pointer-events: none;
 }
 
@@ -137,11 +143,11 @@
 
 /* Nav Component */
 .logo_text {
-  @apply max-sm:hidden font-satoshi font-semibold text-lg text-black tracking-wide;
-}
+  @apply font-satoshi font-semibold text-lg text-black tracking-wide hidden md:block;
+} 
 
 .dropdown {
-  @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-2 justify-end items-end;
+  @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-2 justify-end items-end z-50;
 }
 
 .dropdown_link {

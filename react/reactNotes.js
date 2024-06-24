@@ -203,7 +203,7 @@ other valid method
               if (!emailRegex.test(value)) {
                 return Promise.reject('Input must be a valid email address.');
               }
-            }
+            } 
           
             return Promise.resolve();
           }}
