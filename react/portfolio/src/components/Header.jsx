@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import Typical from "react-typical";
+// import Typical from "react-typical";
 import Switch from "react-switch";
 
 const Header = ({ sharedData }) => {
@@ -25,9 +25,9 @@ const Header = ({ sharedData }) => {
     body.setAttribute(dataThemeAttribute, newTheme);
   };
 
-  const HeaderTitleTypeAnimation = useMemo(() => {
-    return <Typical className="title-styles" steps={titles} loop={50} />;
-  }, [titles]);
+  // const HeaderTitleTypeAnimation = useMemo(() => {
+  //   return <Typical className="title-styles" steps={titles} loop={50} />;
+  // }, [titles]);
 
   return (
     <header
@@ -44,7 +44,7 @@ const Header = ({ sharedData }) => {
             ></span>
             <br />
             <h1 className="mb-0">
-              <Typical steps={sharedData ? [sharedData.name] : []} wrapper="p" />
+              {/* <Typical steps={sharedData ? [sharedData.name] : []} wrapper="p" /> */}
             </h1>
             <div className="title-container">
               {HeaderTitleTypeAnimation}

@@ -1,3 +1,18 @@
+//responsive breakpoints
+// @media screen and (min-width:'640px') {
+// }
+
+// @media screen and (min-width:'768px') {
+// }
+
+// @media screen and (min-width:'1024px') {
+// }
+
+// @media screen and (min-width:'1280px') {
+// }
+
+// @media screen and (min-width:'1536px') {
+// }
 // if the redux state update is slowly reflected then use state and make the call in the separate useEffect.
 
 // form error solve
