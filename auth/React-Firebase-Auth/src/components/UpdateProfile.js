@@ -33,8 +33,8 @@ export default function UpdateProfile() {
       .then(() => {
         history.push("/")
       })
-      .catch(() => {
-        setError("Failed to update account")
+      .catch((err) => {
+        setError(err?.message)
       })
       .finally(() => {
         setLoading(false)
