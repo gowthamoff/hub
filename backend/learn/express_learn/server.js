@@ -16,25 +16,36 @@ let posts = [
     name: "siva",
   },
 ];
-// app.get("/", (req, res) => {
-//   res.send("hello");
-// });
-// app.get("/about", (req, res) => {
-//   res.sendFile(path.join(__dirname, "public", "about.html"));
-// });
 
 app.get("/posts", (req, res) => {
-  res.json(posts); // to send json data
+  const limit = parseInt(req.query.limit)
+  if (!isNaN(limit) && limit > 0) {
+    const data = posts.slice(0, limit)
+    res.json(data ? data : {})
+  }
+  else {
+    res.json(posts);
+  }
 });
 
 app.get("/posts/:id", (req, res) => {
-  res.json(posts.filter((e) => e.id == parseInt(req.params.id))); // to send json data
+  const id = parseInt(req.params.id)
+  const post = posts.find(post => post.id == id)
+
+  if (post) {
+    res.status(200).json(post)
+  } else {
+    res.status(400).json({})
+  }
 });
 
-app.post("/posts/:id", (req, res) => {
-    // posts.push(req)
-    console.log(req.body);
-    res.send('wef')
+// app.post("/posts/:id", (req, res) => {
+//   console.log(req.body);
+//   res.send('wef')
+// });
+
+app.listen(4000, () => {
+  console.log("server running on 4000");
 });
 
 // app.get("/", (req, res) => {
@@ -42,8 +53,11 @@ app.post("/posts/:id", (req, res) => {
 // });
 
 //to access html or other files without defined route
-app.use(express.static(path.join(__dirname, "public")));
+// app.use(express.static(path.join(__dirname, "public")));
 
-app.listen(4000, () => {
-  console.log("server running on 4000");
-});
+// app.get("/", (req, res) => {
+//   res.send("hello");
+// });
+// app.get("/about", (req, res) => {
+//   res.sendFile(path.join(__dirname, "public", "about.html"));
+// });
