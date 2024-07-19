@@ -4,6 +4,7 @@ import express from 'express'
 import posts from './routes/posts.js'
 import logger from './middleware/logger.js';
 import errorHandler from './middleware/errorhandler.js';
+import unKnownRoute from './middleware/unknownRoute.js';
 const app = express();
 
 //middleware to submit forms // body parser middleware
@@ -17,6 +18,9 @@ app.use('/api/posts', posts)
 
 // error handler middleware
 app.use(errorHandler)
+
+// route error handler
+app.use(unKnownRoute)
 
 app.listen(4000, () => {
   console.log("server running on 4000");
