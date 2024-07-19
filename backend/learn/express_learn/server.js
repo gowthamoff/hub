@@ -2,13 +2,21 @@
 // const express = require("express");
 import express from 'express'
 import posts from './routes/posts.js'
+import logger from './middleware/logger.js';
+import errorHandler from './middleware/errorhandler.js';
 const app = express();
 
 //middleware to submit forms // body parser middleware
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+// logger middleware
+app.use(logger)
+
 app.use('/api/posts', posts)
+
+// error handler middleware
+app.use(errorHandler)
 
 app.listen(4000, () => {
   console.log("server running on 4000");

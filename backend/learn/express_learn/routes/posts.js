@@ -26,13 +26,15 @@ router.get("/", (req, res) => {
     res.json(posts);
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", (req, res, next) => {
     const id = parseInt(req.params.id)
     const post = posts.find(post => post.id == id)
-    if (post) {
-        return res.status(200).json(post)
+    if (!post) {
+        const error = new Error(`A post of id ${id} was not found`)
+        error.status = 400
+        return next(error)
     }
-    res.status(400).json({ "msg": "data not found" })
+    res.status(200).json(post)
 });
 
 router.post("/", (req, res) => {
