@@ -1,52 +1,23 @@
-const express = require("express");
-const path = require("path");
+// const path = require("path");
+// const express = require("express");
+import express from 'express'
+import posts from './routes/posts.js'
 const app = express();
 
-let posts = [
-  {
-    id: 1,
-    name: "arun",
-  },
-  {
-    id: 2,
-    name: "ram",
-  },
-  {
-    id: 3,
-    name: "siva",
-  },
-];
+//middleware to submit forms // body parser middleware
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 
-app.get("/posts", (req, res) => {
-  const limit = parseInt(req.query.limit)
-  if (!isNaN(limit) && limit > 0) {
-    const data = posts.slice(0, limit)
-    res.json(data ? data : {})
-  }
-  else {
-    res.json(posts);
-  }
-});
+app.use('/api/posts', posts)
 
-app.get("/posts/:id", (req, res) => {
-  const id = parseInt(req.params.id)
-  const post = posts.find(post => post.id == id)
-
-  if (post) {
-    res.status(200).json(post)
-  } else {
-    res.status(400).json({})
-  }
+app.listen(4000, () => {
+  console.log("server running on 4000");
 });
 
 // app.post("/posts/:id", (req, res) => {
 //   console.log(req.body);
 //   res.send('wef')
 // });
-
-app.listen(4000, () => {
-  console.log("server running on 4000");
-});
 
 // app.get("/", (req, res) => {
 //   res.sendFile(path.join(__dirname, "public", "about.html"));
