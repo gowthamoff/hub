@@ -18,39 +18,39 @@
 // form error solve
 form.setFields([
   {
-    name: "min_order_quantity",
+    name: 'min_order_quantity',
     errors: [],
   },
   {
-    name: "max_order_quantity",
+    name: 'max_order_quantity',
     errors: [],
   },
-]);
+])
 
 // session name - faiecom
 // #single select with multi select animation
-const [dispatchValue, setDispatchValue] = useState([]);
+const [dispatchValue, setDispatchValue] = useState([])
 const handleDispatchStatusChange = (values) => {
   if (values.length > 1) {
-    const newValue = values[values.length - 1];
-    setDispatchValue([newValue]);
-    setDispatchStatus([newValue]);
+    const newValue = values[values.length - 1]
+    setDispatchValue([newValue])
+    setDispatchStatus([newValue])
   } else {
-    setDispatchValue(values);
-    setDispatchStatus(values);
+    setDispatchValue(values)
+    setDispatchStatus(values)
   }
-};
-<Select
+}
+;<Select
   showSearch={false}
-  style={{ width: "160px", height: "36px" }}
+  style={{ width: '160px', height: '36px' }}
   maxTagPlaceholder={
     <span>
-      Dispatch Status <CaretDownOutlined style={{ color: "#5c5f62" }} />
+      Dispatch Status <CaretDownOutlined style={{ color: '#5c5f62' }} />
     </span>
   }
   placeholder={
     <span>
-      Dispatch Status <CaretDownOutlined style={{ color: "#5c5f62" }} />
+      Dispatch Status <CaretDownOutlined style={{ color: '#5c5f62' }} />
     </span>
   }
   onChange={handleDispatchStatusChange}
@@ -64,45 +64,44 @@ const handleDispatchStatusChange = (values) => {
   <Option value="Unshipped" key="2">
     Unshipped
   </Option>
-</Select>;
+</Select>
 
 //use dispatch in normal js file
-import { store } from "../redux/store";
-import { setSessionValidate } from "../redux/reducer/auth";
-const { dispatch } = store;
-dispatch(setSessionValidate({ AuthPage: true })); // AuthPage is name of slice
+import { store } from '../redux/store'
+import { setSessionValidate } from '../redux/reducer/auth'
+const { dispatch } = store
+dispatch(setSessionValidate({ AuthPage: true })) // AuthPage is name of slice
 
 ////use select in normal js file
-import { store } from "../redux/store";
+import { store } from '../redux/store'
 const {
-  AuthPage: { sessionValidate },
-} = store.getState();
-console.log("Session Validate:", sessionValidate);
+  AuthPage: { userType },
+} = store.getState()
+console.log('userType', userType)
 
 //mobile and web same typing mode
-<Input key={index} type="text" inputMode="numeric" />;
+;<Input key={index} type="text" inputMode="numeric" />
 
 //custom antd modal btn
-<Modal
+;<Modal
   width="34em"
   maskClosable={false}
   open={deActivepopup}
   title={
     inactive === 0
-      ? "Are you sure you want to hide this product"
-      : "Are you sure you want to unhide this product"
+      ? 'Are you sure you want to hide this product'
+      : 'Are you sure you want to unhide this product'
   }
-    
   onCancel={() => {
-    deleteProduct.lookup_product_status_id = !inactive;
-    setDeactivepopup(false);
+    deleteProduct.lookup_product_status_id = !inactive
+    setDeactivepopup(false)
   }}
 >
-  <div style={{ fontWeight: "500" }}>Available Quantity : 10</div>
-  <div style={{ fontWeight: "600", marginTop: "0.5rem" }}>
+  <div style={{ fontWeight: '500' }}>Available Quantity : 10</div>
+  <div style={{ fontWeight: '600', marginTop: '0.5rem' }}>
     {inactive === 0
-      ? "Hiding this product means customer will be unable to make purchases on Agricart consumer website"
-      : "Unhiding this product means customer will be able to make purchases on Agricart consumer website"}
+      ? 'Hiding this product means customer will be unable to make purchases on Agricart consumer website'
+      : 'Unhiding this product means customer will be able to make purchases on Agricart consumer website'}
   </div>
   <div id="unique-design">
     <div className="antmodalfooter">
@@ -114,7 +113,7 @@ console.log("Session Validate:", sessionValidate);
       </button>
     </div>
   </div>
-</Modal>;
+</Modal>
 // #unique-design .antmodalfooter {
 //   display: flex !important;
 //   margin-top: 0.8rem;
@@ -160,39 +159,41 @@ console.log("Session Validate:", sessionValidate);
 // }
 
 //form valid before api call
-const formRef = useRef(null);
-const formInstance = formRef.current;
-formInstance
-.validateFields()
-.then(()=>{
- //api call
-})
-
-//custom form validation
-<Form
-  form={form}
-  disabled={edit}
-  name="basic"
-  layout="vertical"
-  ref = {formRef} >
-    <Form.Item rules={[
-        { validator:  numberValidate('hsn_code',form) },
+const formRef = useRef(null)
+const formInstance = formRef.current
+formInstance.validateFields().then(() => {
+  //api call
+}) <
+  //custom form validation
+  Form
+form = { form }
+disabled = { edit }
+name = 'basic'
+layout = 'vertical'
+ref =
+  { formRef } >
+  (
+    <Form.Item
+      rules={[
+        { validator: numberValidate('hsn_code', form) },
         {
           pattern: /^[0-9a-zA-Z]{10}$/,
-          message: 'Exactly 10 alphanumeric characters are allowed'
-        }
-        ]}>
-    </Form.Item>
-export const numberValidate = (fieldName,form) => (rule, value, callback) => {
+          message: 'Exactly 10 alphanumeric characters are allowed',
+        },
+      ]}
+    ></Form.Item>
+  )
+export const numberValidate = (fieldName, form) => (rule, value, callback) => {
   if (!value) {
-    callback();
-    return;
+    callback()
+    return
   }
-  const numericValue = value.replace(/\D/g, '');
-  form.setFieldsValue({ [fieldName]: numericValue });
-  callback();
-};
-{/* 
+  const numericValue = value.replace(/\D/g, '')
+  form.setFieldsValue({ [fieldName]: numericValue })
+  callback()
+}
+{
+  /* 
 
 other valid method 
 <Form.Item
@@ -222,4 +223,5 @@ other valid method
           
             return Promise.resolve();
           }}
-           */}
+           */
+}
