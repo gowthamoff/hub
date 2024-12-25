@@ -9,8 +9,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        customPurple: "#2c2e59",
-        lightPurple: "#d1c8ff",
+        darkh1: "#424874",
+        darkh2: "#9C90C5",
+        lighth1: "#A6B1E1",
+        lighth2: "#DCD6F7",
+        lighth3: "#F4EEFF",
+      },
+      fontFamily: {
+        bebas: ["'Bebas Neue'", "sans-serif"],
       },
     },
   },
