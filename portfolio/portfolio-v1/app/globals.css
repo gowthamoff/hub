@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --color-light-h1: #a6b1e1;
+  --color-light-h2: #dcd6f7;
+  --color-light-h3: #f4eeff;
+  --color-dark-h1: #424874;
+  --color-dark-h2: #9c90c5;
+}

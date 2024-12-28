@@ -9,11 +9,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        darkh1: "#424874",
-        darkh2: "#9C90C5",
-        lighth1: "#A6B1E1",
-        lighth2: "#DCD6F7",
-        lighth3: "#F4EEFF",
+        light: {
+          h1: "var(--color-light-h1)",
+          h2: "var(--color-light-h2)",
+          h3: "var(--color-light-h3)",
+        },
+        dark: {
+          h1: "var(--color-dark-h1)",
+          h2: "var(--color-dark-h2)",
+        },
       },
       fontFamily: {
         bebas: ["'Bebas Neue'", "sans-serif"],
