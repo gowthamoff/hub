@@ -6,9 +6,9 @@ import Projects from "../pages/projects";
 const Layout = () => {
   return (
     <div className="flex flex-col items-center font-bebas">
-      <div className="max-w-[1840px] flex">
+      <div className="max-w-[1840px] flex flex-col">
         <Hero />
-        {/* <Intro /> */}
+        <Intro />
         {/* <Projects />
       <Contact /> */}
       </div>
