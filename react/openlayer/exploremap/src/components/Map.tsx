@@ -103,3 +103,24 @@ const ProjectionComparison = () => {
 };
 
 export default ProjectionComparison;
+//Key points about projections:
+
+// Web Mercator (EPSG:3857):
+
+// Most common for web mapping
+// Preserves angles and shapes for small areas
+// Significant distortion near poles
+// Used by Google Maps, OpenStreetMap
+
+// WGS84 (EPSG:4326):
+
+// Geographic coordinate system
+// Uses latitude/longitude
+// Good for global data
+// Not ideal for visual display
+
+// Custom Projections:
+
+// Can be registered using proj4js
+// Useful for regional or specialized maps
+// Must be registered before use
