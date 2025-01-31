@@ -9,3 +9,14 @@
   --color-dark-h1: #424874;
   --color-dark-h2: #9c90c5;
 }
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}

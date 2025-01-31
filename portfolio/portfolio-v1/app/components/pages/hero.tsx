@@ -33,13 +33,13 @@ const Hero = () => {
     ));
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden">
+    <div className="relative h-screen w-full">
       {/* Base background */}
-      <div className="absolute inset-0 bg-dark-h1 dark:bg-dark-darkh1 transition-colors duration-300" />
+      <div className="absolute inset-0 bg-dark-h1" />
 
       {/* Sharp diagonal split */}
       <div
-        className="absolute inset-0 bg-light-h1 dark:bg-dark-lighth1 transition-colors duration-300"
+        className="absolute inset-0 bg-light-h1"
         style={{
           clipPath: "polygon(0 50%, 100% 50%, 100% 100%, 0 100%)",
         }}
@@ -55,7 +55,7 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.7 }}
               transition={{ delay: i * 0.1 }}
-              className="h-2 w-2 rounded-full bg-lighth2"
+              className="h-2 w-2 rounded-full bg-light-h2"
             />
           ))}
       </div>
@@ -70,19 +70,22 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.7 }}
               transition={{ delay: i * 0.1 + 1 }}
-              className="h-2 w-2 rounded-full bg-darkh1 hover:bg-lighth2"
+              className="h-2 w-2 rounded-full bg-dark-h1"
             />
           ))}
       </div>
 
       {/* Text content */}
-      <div className="absolute inset-0">
+      <div className="relative flex max-w-[1440px] mx-auto">
         <div className="flex flex-col justify-center items-center xl:items-start h-screen w-full xl:px-4">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 2 }}
-            className="text-[5rem] xl:text-[11rem] leading-tight tracking-tighter text-nowrap"
+            className="leading-tight tracking-tighter whitespace-nowrap overflow-hidden"
+            style={{
+              fontSize: "clamp(3rem, 18.5vw, 11rem)",
+            }}
           >
             {renderTextWithHover(
               "FRONT END",
@@ -90,12 +93,16 @@ const Hero = () => {
               "--color-light-h2"
             )}
           </motion.h1>
-          <div className="flex items-center max-xl:flex-col w-full xl:top-10 relative">
+
+          <div className="flex items-center max-xl:flex-col w-full xl:top-20 relative">
             <motion.h1
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 2, delay: 0.2 }}
-              className="text-[14rem] xl:text-[20rem] leading-none xl:tracking-[-28px] flex "
+              className="  leading-none xl:tracking-[-28px] flex"
+              style={{
+                fontSize: "clamp(12rem, 18.5vw, 24rem)",
+              }}
             >
               {renderTextWithHover(
                 "DEV",

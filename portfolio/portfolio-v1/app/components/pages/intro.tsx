@@ -95,10 +95,10 @@ export function Intro() {
   return (
     <section
       ref={containerRef}
-      className="relative inset-0 w-screen bg-dark-h1"
+      className="relative bg-dark-h1"
       style={{ minHeight: `${numOfSections * 100}vh` }}
     >
-      <div className="sticky top-0 flex min-h-screen items-center justify-center">
+      <div className="sticky top-0 min-h-screen items-center justify-center">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 py-12 sm:py-24 md:px-10 lg:px-20">
           <div className="flex flex-col gap-6 sm:gap-8 text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold tracking-tight">
             {texts.map((text, index) => (
