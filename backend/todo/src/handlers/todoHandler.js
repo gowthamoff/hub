@@ -1,12 +1,10 @@
 const AWS = require("aws-sdk");
 const { v4: uuidv4 } = require("uuid");
 const config = require("../config/config");
+const { authorize } = require("../middleware/authMiddleware");
 
 const dynamoDB = new AWS.DynamoDB.DocumentClient({
   region: config.region,
-  ...(process.env.IS_OFFLINE && {
-    endpoint: "http://localhost:8000",
-  }),
 });
 
 // Main Lambda handler
@@ -33,11 +31,16 @@ exports.main = async (event) => {
 
 // Convert Express-style functions to Lambda-compatible functions
 const createTodo = async (event) => {
+  const authError = await authorize(event);
+  if (authError) return authError;
+
   const { title, description } = JSON.parse(event.body);
+
   const todo = {
     id: uuidv4(),
     title,
     description,
+    userId: event.user.id,
     createdAt: new Date().toISOString(),
     completed: false,
   };
@@ -45,7 +48,9 @@ const createTodo = async (event) => {
   return { statusCode: 201, body: JSON.stringify(todo) };
 };
 
-const listTodos = async () => {
+const listTodos = async (event) => {
+  const authError = await authorize(event);
+  if (authError) return authError;
   const result = await dynamoDB.scan({ TableName: config.tableName }).promise();
   return { statusCode: 200, body: JSON.stringify(result.Items) };
 };

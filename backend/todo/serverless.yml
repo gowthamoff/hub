@@ -6,6 +6,7 @@ provider:
   region: ap-south-1
   environment:
     TODOS_TABLE: ${self:service}-todos-${opt:stage, 'dev'}
+    JWT_SECRET: ${ssm:/serverless-api/jwt-secret}
 
   # IAM Role with permissions for DynamoDB
   iam:
@@ -23,9 +24,16 @@ provider:
 
 # Functions to handle API requests
 functions:
+  login:
+    handler: src/handlers/authHandler.login
+    events:
+      - http:
+          path: /login
+          method: POST
+          cors: true
   api:
     handler: src/handlers/todoHandler.main
-    timeout: 120 # Increase timeout to 120 seconds if needed
+    timeout: 7 # Increase timeout to 120 seconds if needed
     events:
       - http:
           path: /todos
