@@ -25,14 +25,14 @@ provider:
 # Functions to handle API requests
 functions:
   login:
-    handler: src/handlers/authHandler.login
+    handler: src/handler/authHandler.login
     events:
       - http:
           path: /login
           method: POST
           cors: true
   api:
-    handler: src/handlers/todoHandler.main
+    handler: src/handler/todoHandler.main
     timeout: 7 # Increase timeout to 120 seconds if needed
     events:
       - http:

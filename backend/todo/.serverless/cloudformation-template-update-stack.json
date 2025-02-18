@@ -185,9 +185,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/todo-serverless-api/dev/1739883719971-2025-02-18T13:01:59.971Z/todo-serverless-api.zip"
+          "S3Key": "serverless/todo-serverless-api/dev/1739885743493-2025-02-18T13:35:43.493Z/todo-serverless-api.zip"
         },
-        "Handler": "src/handlers/authHandler.login",
+        "Handler": "src/handler/authHandler.login",
         "Runtime": "nodejs18.x",
         "FunctionName": "todo-serverless-api-dev-login",
         "MemorySize": 1024,
@@ -216,9 +216,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/todo-serverless-api/dev/1739883719971-2025-02-18T13:01:59.971Z/todo-serverless-api.zip"
+          "S3Key": "serverless/todo-serverless-api/dev/1739885743493-2025-02-18T13:35:43.493Z/todo-serverless-api.zip"
         },
-        "Handler": "src/handlers/todoHandler.main",
+        "Handler": "src/handler/todoHandler.main",
         "Runtime": "nodejs18.x",
         "FunctionName": "todo-serverless-api-dev-api",
         "MemorySize": 1024,
@@ -240,24 +240,24 @@
         "ApiLogGroup"
       ]
     },
-    "LoginLambdaVersionGduFbNF2A8vT0Ub4II0g63NcFvmywkk6F9temYbn5Y": {
+    "LoginLambdaVersionT0MQPb6hfGLydO0RsWXHQfDPFa4QKX8WVgv5KatNzM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "LoginLambdaFunction"
         },
-        "CodeSha256": "Pn6uJKWtB51tqODBXpT6j7l4RfgXQEwbPorlsnTqsmU="
+        "CodeSha256": "wZVzrpGqgL2xeG0WhC3D/xDPADlknJ3Qif4tdTgOrf0="
       }
     },
-    "ApiLambdaVersionoolROO0Y5j97xyDp8y1cekHMthMcR7CKr5F0kaV0": {
+    "ApiLambdaVersionU5yhiucjDCL9dMUz7rgX3oe3edhGBaAeCjR0uRwaS7M": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "Pn6uJKWtB51tqODBXpT6j7l4RfgXQEwbPorlsnTqsmU="
+        "CodeSha256": "wZVzrpGqgL2xeG0WhC3D/xDPADlknJ3Qif4tdTgOrf0="
       }
     },
     "ApiGatewayRestApi": {
@@ -587,7 +587,7 @@
         "ApiLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1739883705057": {
+    "ApiGatewayDeployment1739885725039": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -710,7 +710,7 @@
     "LoginLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "LoginLambdaVersionGduFbNF2A8vT0Ub4II0g63NcFvmywkk6F9temYbn5Y"
+        "Ref": "LoginLambdaVersionT0MQPb6hfGLydO0RsWXHQfDPFa4QKX8WVgv5KatNzM"
       },
       "Export": {
         "Name": "sls-todo-serverless-api-dev-LoginLambdaFunctionQualifiedArn"
@@ -719,7 +719,7 @@
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersionoolROO0Y5j97xyDp8y1cekHMthMcR7CKr5F0kaV0"
+        "Ref": "ApiLambdaVersionU5yhiucjDCL9dMUz7rgX3oe3edhGBaAeCjR0uRwaS7M"
       },
       "Export": {
         "Name": "sls-todo-serverless-api-dev-ApiLambdaFunctionQualifiedArn"
