@@ -1,0 +1,56 @@
+service: todo-serverless-api
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-south-1
+  environment:
+    TODOS_TABLE: ${self:service}-todos-${opt:stage, 'dev'}
+
+  # IAM Role with permissions for DynamoDB
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: !GetAtt TodosTable.Arn
+
+# Functions to handle API requests
+functions:
+  api:
+    handler: src/handlers/todoHandler.main
+    timeout: 120 # Increase timeout to 120 seconds if needed
+    events:
+      - http:
+          path: /todos
+          method: ANY
+          cors: true
+      - http:
+          path: /todos/{id}
+          method: ANY
+          cors: true
+
+# Define resources like DynamoDB Table
+resources:
+  Resources:
+    TodosTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.TODOS_TABLE}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+# Serverless Offline Plugin for local testing
+plugins:
+  - serverless-offline

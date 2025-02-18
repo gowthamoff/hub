@@ -1,0 +1,41 @@
+{
+  "name": "todo-serverless-api",
+  "version": "1.0.0",
+  "description": "Serverless TODO API using Express and AWS Lambda",
+  "main": "lambda.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "serverless offline start",
+    "deploy": "serverless deploy",
+    "deploy:prod": "serverless deploy --stage prod",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "debug": "SET SLS_DEBUG=* && node --inspect ./node_modules/serverless/bin/serverless offline -s dev"
+  },
+  "keywords": [
+    "serverless",
+    "express",
+    "aws",
+    "lambda",
+    "dynamodb",
+    "api"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1692.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "serverless-http": "^3.2.0",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "serverless": "^3.33.0",
+    "serverless-offline": "^12.0.4",
+    "eslint": "^8.44.0",
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
