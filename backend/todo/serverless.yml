@@ -1,6 +1,10 @@
+org: gowtham4929
+app: todo-serverless-api
 service: todo-serverless-api
 
 provider:
+  logs:
+    restApi: false
   name: aws
   runtime: nodejs18.x
   region: ap-south-1
